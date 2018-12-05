@@ -16,7 +16,8 @@ def craigslist_thinkpads():
 
 def r_thinkpads():
 
-    regex = '\[H\]*(?:(?!\[W\]).)*'
+    #Still not working 
+    regex = r'\[H\]*(?:(?!\[W\]).)*'
 
     reddit = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
                      client_secret=settings.REDDIT_CLIENT_SECRET,
@@ -26,8 +27,10 @@ def r_thinkpads():
 
     subreddit = reddit.subreddit('thinkpadsforsale')
 
+
     for post in subreddit.new():
-        if re.match(regex, 'T480') in post.title:
+      
+        if re.match(regex, post.title):
             print(post.title)
 
 r_thinkpads()
