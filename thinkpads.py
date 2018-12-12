@@ -7,6 +7,15 @@ import settings
 
 MODEL = 'T480'
 
+
+def main():
+    print('Checking Craigslist')
+    craigslist_thinkpads()
+
+    print('Checking r/Thinkpadsforsale')
+    r_thinkpads()
+
+
 def craigslist_thinkpads():
 
     cl = CraigslistForSale(filters={'query':MODEL})
@@ -18,7 +27,6 @@ def craigslist_thinkpads():
 
 def r_thinkpads():
 
-    #Still not working 
     regex = re.compile(r'\[H\].*(T480).* (.*?)\[W\]')
 
     reddit = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
@@ -29,13 +37,10 @@ def r_thinkpads():
 
     subreddit = reddit.subreddit('thinkpadsforsale')
 
-
     for post in subreddit.new():
-        
         if regex.search(post.title):
             print(post.title)
 
-print('Checking Craigslist')
-craigslist_thinkpads()
-print('Checking r/Thinkpadsforsale')
-r_thinkpads()
+
+if __name__ == '__main__':
+    main()
