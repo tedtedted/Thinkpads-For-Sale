@@ -27,7 +27,7 @@ def craigslist_thinkpads():
 
 def r_thinkpads():
 
-    regex = re.compile(r'\[H\].*(T480).* (.*?)\[W\]')
+    regex = re.compile(rf'\[H\].*({MODEL}).* (.*?)\[W\]')
 
     reddit = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
                      client_secret=settings.REDDIT_CLIENT_SECRET,
