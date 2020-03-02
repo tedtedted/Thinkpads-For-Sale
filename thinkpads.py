@@ -1,11 +1,20 @@
+import os
 import re
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from craigslist import CraigslistForSale
 import praw
 
-import settings
-
 MODEL = "T480"
+
+REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")
+REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")
+REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
+REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT")
+REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
 
 
 def main():
@@ -30,11 +39,11 @@ def r_thinkpads():
     regex = re.compile(rf"\[H\].*({MODEL}).* (.*?)\[W\]")
 
     reddit = praw.Reddit(
-        client_id=settings.REDDIT_CLIENT_ID,
-        client_secret=settings.REDDIT_CLIENT_SECRET,
-        password=settings.REDDIT_PASSWORD,
-        user_agent=settings.REDDIT_USER_AGENT,
-        username=settings.REDDIT_USERNAME,
+        client_id=REDDIT_CLIENT_ID,
+        client_secret=REDDIT_CLIENT_SECRET,
+        password=REDDIT_PASSWORD,
+        user_agent=REDDIT_USER_AGENT,
+        username=REDDIT_USERNAME,
     )
 
     subreddit = reddit.subreddit("thinkpadsforsale")
